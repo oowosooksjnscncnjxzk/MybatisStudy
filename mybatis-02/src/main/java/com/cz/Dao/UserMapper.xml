@@ -4,24 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--绑定一个对应的Dao接口-->
 <mapper namespace="com.cz.Dao.UserDao">
-    <!--  查询语句-->
+    <!--  查询所有用户-->
     <select id="getAllUsers" resultType="com.cz.pojo.User">
         SELECT * FROM mybatis.user
     </select>
 
-    <select id="getUserById" parameterType="int" resultType="com.cz.pojo.User">
-        SELECT * FROM mybatis.user WHERE id = #{id}
-    </select>
-    <!--  插入语句-->
+
+    <!--  插入用户-->
     <insert id="addUser" parameterType="com.cz.pojo.User">
         INSERT INTO mybatis.user(id, name, pwd) VALUES(#{id}, #{name}, #{pwd})
     </insert>
-    <!--  更新语句-->
+
+    <!--  更新用户-->
     <update id="updateUser" parameterType="com.cz.pojo.User">
         UPDATE mybatis.user SET name = #{name}, pwd = #{pwd} WHERE id = #{id}
     </update>
-    <insert id="adduser2" parameterType="map">
-        INSERT INTO mybatis.user(id, name, pwd) VALUES(#{id}, #{name}, #{pwd})
-    </insert>
+
+    <!--  删除用户-->
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM mybatis.user WHERE id = #{id}
+    </delete>
 
 </mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义命名空间，命名空间是唯一的，用于标识 MyBatis 映射文件，在 MyBatis 配置文件中使用该命名空间引用该映射文件 -->
+<!--也就是表示实现的是UserDao接口的GetUserList方法-->
+<mapper namespace="com.cz.Dao.Dao">
+    <!--  id 为方法名，resultType 为返回值类型，这里返回的是 User 类型，即 User 类  -->
+    <select id="GetUserList" resultType="com.cz.pojo.User">
+        <!-- 这里是具体的 SQL 语句，查询 Mybatis 数据库中的 user 表的所有记录 -->
+        select * from Mybatis.user
+    </select>
+</mapper>
+<!--注意要在Mybatis-Config.xml中配置mapper文件-->
