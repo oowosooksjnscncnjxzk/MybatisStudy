@@ -5,18 +5,18 @@
 <!--绑定一个对应的Dao接口-->
 <mapper namespace="com.cz.Dao.UserDao">
     <!--  查询所有用户-->
-    <select id="getAllUsers" resultType="com.cz.pojo.User">
+    <select id="getAllUsers" resultType="user">
         SELECT * FROM mybatis.user
     </select>
 
 
     <!--  插入用户-->
-    <insert id="addUser" parameterType="com.cz.pojo.User">
+    <insert id="addUser" parameterType="User">
         INSERT INTO mybatis.user(id, name, pwd) VALUES(#{id}, #{name}, #{pwd})
     </insert>
 
     <!--  更新用户-->
-    <update id="updateUser" parameterType="com.cz.pojo.User">
+    <update id="updateUser" parameterType="User">
         UPDATE mybatis.user SET name = #{name}, pwd = #{pwd} WHERE id = #{id}
     </update>
 

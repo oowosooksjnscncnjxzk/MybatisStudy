@@ -12,6 +12,9 @@
         <module>mybatis-01</module>
         <module>mybatis01-mytry</module>
         <module>mybatis-02</module>
+        <module>mybatis-03</module>
+        <module>mybatis-04</module>
+        <module>mybatis-05</module>
     </modules>
 
     <properties>
@@ -37,6 +40,14 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version> <!-- 或者使用合适的版本 -->
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -59,7 +70,4 @@
             </resource>
         </resources>
     </build>
-
-
-
 </project>

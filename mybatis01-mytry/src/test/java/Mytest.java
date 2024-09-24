@@ -21,8 +21,6 @@ public class Mytest {
                 System.out.println(user);
             }
 
-        }catch (){
-
         }finally {
             // 关闭SqlSession
             //每次收到 HTTP 请求，就可以打开一个 SqlSession，返回一个响应后，就关闭它。 这个关闭操作很重要，为了确保每次都能执行关闭操作，你应该把这个关闭操作放到 finally 块中。

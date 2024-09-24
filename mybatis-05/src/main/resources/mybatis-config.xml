@@ -10,6 +10,11 @@
         <property name="password" value="111111"/>
     </properties>
 
+    <settings>
+        <!--     标准日志工厂实现   -->
+        <!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
     <!--  可以给实体类起别名  -->
     <typeAliases>
         <!-- 别名配置 -->
