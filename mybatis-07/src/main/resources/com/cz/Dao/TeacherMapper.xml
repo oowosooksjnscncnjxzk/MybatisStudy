@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Configuration核心配置 -->
+<mapper namespace="com.cz.Dao.TeacherMapper">
+
+<!--  方式一：按照查询嵌套处理  -->
+    <select id="selectAll" resultMap="TeacherStudent">
+        SELECT * FROM teacher;
+    </select>
+
+    <resultMap id="TeacherStudent" type="teacher">
+          <result property="id" column="id"/>
+          <result property="name" column="name"/>
+          <!--   复杂的属性我们需要单独处理 对象：association 集合：collection
+               javaType：指定java类型，默认是Object
+               ofType：指定集合元素的类型，默认是Object
+               -->
+          <collection property="students" javaType="List" ofType="Student" column="id" select="getStudentsByTeacherId"/>
+    </resultMap>
+    <select id="getStudentsByTeacherId" resultType="Student">
+        SELECT * FROM student WHERE tid = #{id};
+    </select>
+
+<!--  方式二：按照结果嵌套处理  -->
+
+    <select id="getTeacher" resultMap="teacherStudent" parameterType="int">
+        select s.id sid,s.name sname,t.name tname,t.id tid
+        from student s ,teacher t
+        where s.tid=t.id and t.id=#{tid};
+    </select>
+
+    <resultMap id="teacherStudent" type="teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname"/>
+        <collection property="students" ofType="student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+
+
+
+
+</mapper>

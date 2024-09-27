@@ -16,8 +16,6 @@
     </settings>
     <!--  可以给实体类起别名  -->
     <typeAliases>
-        <!-- 别名配置 -->
-        <typeAlias type="com.cz.pojo.User" alias="User"/>
         <package name="com.cz.pojo"/>
     </typeAliases>
     <environments default="development">
@@ -44,8 +42,8 @@
 
     </environments>
 
-
     <mappers>
-        <mapper class="com.cz.Dao.UserDao"/>
+        <mapper resource="com/cz/Dao/TeacherMapper.xml"/>
+        <mapper resource="com/cz/Dao/StudentMapper.xml"/>
     </mappers>
 </configuration>

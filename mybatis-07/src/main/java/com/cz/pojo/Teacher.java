@@ -3,20 +3,17 @@ package com.cz.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.Alias;
+import lombok.ToString;
+
+import java.util.List;
 
 @Data
-@Alias("user")
 @AllArgsConstructor
 @NoArgsConstructor
-//实体类
-public class User {
+public class Teacher {
     private int id;
-
     private String name;
 
-
-    private String password;
-
-
+    //一个老师要有多个学生
+    private List<Student> students;
 }

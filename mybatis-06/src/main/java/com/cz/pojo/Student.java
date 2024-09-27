@@ -3,20 +3,13 @@ package com.cz.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.Alias;
 
 @Data
-@Alias("user")
 @AllArgsConstructor
 @NoArgsConstructor
-//实体类
-public class User {
+public class Student {
     private int id;
-
     private String name;
-
-
-    private String password;
-
-
+    //学生是需要关联一个老师的id
+    private Teacher teacher;
 }
