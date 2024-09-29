@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Configuration核心配置 -->
+
+<mapper namespace="com.cz.dao.BlogMapper">
+
+    <insert id="insertBlog" parameterType="blog">
+        INSERT INTO blog (id, title, author, create_time, views)
+        VALUES (#{id}, #{title}, #{author}, #{createTime}, #{views});
+    </insert>
+
+    <sql id="if_title_author">
+        <if test="title!= null">
+            and title like #{title}
+        </if>
+        <if test="author!= null">
+            and author = #{author}
+        </if>
+
+    </sql>
+        <!--  如果参数有title，则模糊查询title; 如果参数有author，则精确查询author; 否则查询所有 -->
+    <select id="selectBlogsIF" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <include refid="if_title_author"></include>
+        </where>
+    </select>
+
+       <!--  传入了 “title” 就按 “title” 查找，传入了 “author” 就按 “author” 查找的情形。若两者都没有传入，就返回所有记录  -->
+    <select id="selectBlogsByCondition" parameterType="map" resultType="blog">
+            select * from blog
+            <where>
+               <choose>
+                    <when test="title!= null">
+                        and title like #{title}
+                    </when>
+                    <when test="author!= null">
+                        and author = #{author}
+                    </when>
+                    <otherwise>
+                        and 1=1
+                    </otherwise>
+               </choose>
+            </where>
+    </select>
+
+<!--  动态更新博客，有哪一个字段需要更新就更新哪一个字段  -->
+<!-- 注意createTime是Date类型，需要用#{createTime}来传入参数  -->
+    <update id="updateBlog" parameterType="blog">
+            UPDATE blog
+        <set>
+
+            <if test="author!= null">
+                author = #{author},
+            </if>
+
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="views!= null">
+                views = #{views}
+            </if>
+            <if test="title!= null">
+                title = #{title},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--  使用Foreach标签查询第1-3条记录  -->
+
+    <select id="selectBlogsForeach" parameterType="map" resultType="blog">
+        select * from blog
+        <where>
+            <foreach collection="ids" item="id" open="and (" close=")" separator="or">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
+        <!--   collection="ids" 代表要遍历的集合，
+        item="id" 代表集合中的元素，
+        open="and id in (" 代表开始标签，close=")" 代表结束标签,
+        separator="," 代表分隔符 -->
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
